@@ -1,0 +1,8 @@
+[
+    {
+        "nombre": "Tarea de ejemplo",
+        "descripcion": "Descripcion de la tarea",
+        "fecha_creacion": "2024-12-15",
+        "realizado": false
+    }
+]
