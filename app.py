@@ -4,7 +4,7 @@ import json
 import datetime
 import copy
 from functions.functions import recargar, cargarJSON, guardarAlJSON, descargarJSON, reemplazarJSON
-
+from db.db import crearTareaDB, mostrarTareasDB, reemplazarTareasDB, eliminarTareaDB
 
 st.set_page_config(layout="wide")
 
@@ -47,8 +47,11 @@ with left:
         recargar()
         
     if st.button('Ver DataBase', use_container_width=True):
-        st.warning('Falta Codearlo :P')
+        st.session_state['datosTabla'] = mostrarTareasDB()
+        st.session_state['sesion'] = 'Database'
+        st.session_state['estadoBtn'] = False
 
+        recargar()
 with right:
     st.columns(3)[1].subheader("Opciones")
     
@@ -74,7 +77,7 @@ with right:
                 st.success(f'Visualizando {archivo.name}')
                 if st.button('Guardar al JSON', use_container_width=True):
                     st.session_state['estados']= reemplazarJSON(datos)
-                
+                    st.success('JSON reemplazado correctamente')
             except json.JSONDecodeError as e:
                 st.error('Error al leer el archivo JSON')
 
@@ -90,25 +93,68 @@ with center:
             tarea = {
                 "nombre": nombreTarea,
                 "descripcion": descripcionTarea,
-                "fecha_creacion": datetime.date.today(),
+                "fecha_creacion": datetime.datetime.today(),
                 "realizado": realizado
             }
             
             
             if st.session_state['sesion']=='JSON':
                 st.session_state['estados'] = guardarAlJSON(tarea)
-                recargar()
+                st.toast('La vista de la tabla del JSON no se actualiza automaticamente')
+                
             if st.session_state['sesion']=='Sesion Actual':
                 st.session_state['datosTabla'].append(tarea)
                 st.session_state['sesionActual'].append(tarea)
                 st.success('Tarea agregada a la Sesion Actual Exitosamente ! 🎉')
                 recargar()
+            if st.session_state['sesion']=='Database':
+                st.session_state['estados'] = crearTareaDB(tarea['nombre'], tarea['descripcion'], tarea['realizado'])
+                recargar()
+                
             
-            recargar()
-
     
 st.header('Tareas:')
 
 st.info(f'Interactuando en {st.session_state["sesion"]}')
+
 df = pd.DataFrame(st.session_state['datosTabla'])
-st.dataframe(df, width=800, use_container_width=True)
+
+dtf = st.data_editor(
+    df,
+    column_config={
+        "realizado": st.column_config.CheckboxColumn(
+            "realizado",
+            default=False,
+            disabled=False,
+        ),
+    },
+    disabled=['nombre', 'descripcion', 'fecha_creacion'],
+    use_container_width=True
+)
+
+if dtf is not st.empty:
+    for indice, columna in dtf.iterrows():
+        if columna['realizado'] != df.loc[indice, 'realizado']:
+            
+            df.loc[indice, 'realizado'] = columna['realizado']
+            
+            
+            st.balloons()
+            if st.session_state['sesion']=='Sesion Actual':
+                st.session_state['sesionActual'][indice]['realizado'] = columna['realizado']
+                recargar()
+                
+            elif st.session_state['sesion'] == 'JSON':
+                datosJson = cargarJSON()
+                datosJson[indice]['realizado'] = columna['realizado']
+                reemplazarJSON(datosJson)
+            
+            elif st.session_state['sesion'] == 'Database':
+                tareas = mostrarTareasDB()
+                tareas[indice]['realizado'] = columna['realizado']
+                reemplazarTareasDB(tareas[indice]['id'], tareas[indice])
+                st.success('Cambios en la Database!')
+                if tareas[indice]['realizado'] == True:
+                    st.error(f'Tarea {tareas[indice]["nombre"]} Eliminada :D')
+                    eliminarTareaDB(tareas[indice]['id'])
+                
