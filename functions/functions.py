@@ -26,3 +26,13 @@ def guardarAlJSON(data):
         json.dump(datos, archivo, indent=4, default=str)
     st.success('Tarea agregada en el JSON Exitosamente ! 🎉')
     
+    
+def descargarJSON():
+    datos = cargarJSON()
+    return json.dumps(datos)
+
+def reemplazarJSON(datos):
+    with open('datos.json', 'w') as archivo:
+        jason = json.dumps(datos, indent=4)
+        archivo.write(jason)
+    st.success('JSON reemplazado!')
