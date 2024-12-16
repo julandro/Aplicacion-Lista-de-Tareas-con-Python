@@ -51,6 +51,7 @@ with left:
         st.session_state['sesion'] = 'Database'
         st.session_state['estadoBtn'] = False
 
+        st.info('Motrando y cambiando a la Database...')
         recargar()
 with right:
     st.columns(3)[1].subheader("Opciones")
