@@ -1,5 +1,11 @@
 import streamlit as st
 import json
+import time
+
+
+def recargar():
+    time.sleep(0.7)
+    st.rerun()
 
 def cargarJSON():
     try:
@@ -12,3 +18,11 @@ def cargarJSON():
         return []  # Si el archivo no existe, devolvemos una lista vacía
     except json.JSONDecodeError:
         return []  # Si el archivo tiene errores, devolvemos una lista vacía
+    
+def guardarAlJSON(data):
+    datos = cargarJSON()
+    datos.append(data)
+    with open('datos.json', 'w') as archivo:
+        json.dump(datos, archivo, indent=4, default=str)
+    st.success('Tarea agregada en el JSON Exitosamente ! 🎉')
+    

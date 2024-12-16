@@ -4,5 +4,29 @@
         "descripcion": "Descripcion de la tarea",
         "fecha_creacion": "2024-12-15",
         "realizado": false
+    },
+    {
+        "nombre": "Estudiar Python",
+        "descripcion": "",
+        "fecha_creacion": "2024-12-15",
+        "realizado": false
+    },
+    {
+        "nombre": "Irme al ba\u00f1o",
+        "descripcion": "",
+        "fecha_creacion": "2024-12-15",
+        "realizado": false
+    },
+    {
+        "nombre": "",
+        "descripcion": "",
+        "fecha_creacion": "2024-12-15",
+        "realizado": false
+    },
+    {
+        "nombre": "",
+        "descripcion": "",
+        "fecha_creacion": "2024-12-15",
+        "realizado": false
     }
 ]
