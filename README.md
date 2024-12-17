@@ -13,10 +13,8 @@ Este proyecto esta basado en un aplicativo de Gestión de Tareas, que nos puede 
 - [Uso](#uso)
 - [Características](#características)
 - [Estructura del Proyecto](#estructura-del-proyecto)
-- [Documentación Técnica](#documentación-técnica)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
 - [Créditos](#créditos)
+- [Recursos y Enlaces Adicionales](#recursos-y-enlaces-adicionales)
 
 ---
 
@@ -61,20 +59,6 @@ Una vez configurado y listo todo puedes ejecutar el proyecto:
   streamlit run ./app.py
   ```
 
-### Ejemplo de uso:
-
-A continuación se muestra un ejemplo de cómo usar el proyecto:
-
-```javascript
-import { funcionPrincipal } from 'nombre-del-proyecto';
-
-const resultado = funcionPrincipal(parametros);
-console.log(resultado);
-```
-
-*Captura de pantalla de la interfaz o salida esperada.*
-
----
 
 ## Características
 
@@ -86,12 +70,10 @@ console.log(resultado);
 #### Manejo de Archivos
 - [Descarga de JSON]: Con esta funcionalidad podremos descargar el json con el que estemos trabajando.
 - [Importar JSON]: Esta funcionalidad nos permite visualizar un archivo JSON externo en la tabla.
-- [Característica 3]: Breve descripción.
+- [Guardar el JSON]: Esta funcionalidad se nos muestra despues de ingresar un archivo JSON y nos permite reemplazar el archivo JSON externo por el actual 
 
 
 ---
-
-## Documentación Técnica
 
 ### Tecnologías Utilizadas
 
