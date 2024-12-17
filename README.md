@@ -26,7 +26,7 @@ Este proyecto esta basado en un aplicativo de Gestión de Tareas, que nos puede 
 ### Requisitos Previos
 1. **Python**
         
-        Tener instalado Python y su versión 3.11.9
+        Tener instalado Python en su versión 3.11.9
 
 ---
 
