@@ -44,7 +44,7 @@ Sigue los pasos a continuación para configurar el proyecto en tu entorno local:
    cd proyecto
    ```
 3. **Crea y Activa un entorno virtual:**
-   - Con `python` en la termina:
+   - Con `python` en la terminal:
 
      ```bash
      python -m venv venv
